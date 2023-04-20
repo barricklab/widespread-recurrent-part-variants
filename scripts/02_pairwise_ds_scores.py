@@ -4,6 +4,20 @@ Requires:
  - addgene fastas
  - blast database of addgene fastas
  - blastn in the environment
+ 
+ example usage:
+ 
+ python3 02_pairwise_ds_scores.py \
+    --variant 18438 \
+    --i 329 \
+    --j 489 \
+    --id1 104342 \
+    --id2 64329 \
+    >> ds_scores.csv
+
+`variant`, `i`, and `j` are used downstream for analysis,
+but are not explicitly used by the script.
+`id1` and `id2` are the addgene ids of the plasmids being compared.
 """
 import argparse
 import subprocess
@@ -43,7 +57,6 @@ def get_gbk(addgeneNum):
 def pairwise_BLAST(
     addgeneNum1,
     addgeneNum2,
-    returnRaw=False,
     perc_identity=98,
     penalty=-8,
     reward=2,
